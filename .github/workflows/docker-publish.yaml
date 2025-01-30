@@ -3,13 +3,13 @@ name: Build Docker Image, Push to GHCR
 on:
   push:
     # Publish HEAD of main branch as :latest image tag
-    branches: [ "main" ]
+    branches: [ "main", "ohm" ]
     # Publish semver tags as named image tags
-    tags: [ 'v*.*.*' ]
+    # tags: [ 'v*.*.*' ]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: osmcha/osmcha-frontend
+  IMAGE_NAME: opnhistoricalmap/osmcha-frontend
 
 jobs:
   build:
