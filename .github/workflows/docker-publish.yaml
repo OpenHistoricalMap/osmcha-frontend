@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: opnhistoricalmap/osmcha-frontend
+  IMAGE_NAME: openhistoricalmap/osmcha-frontend
 
 jobs:
   build:
