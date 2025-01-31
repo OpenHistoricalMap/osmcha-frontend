@@ -7,7 +7,7 @@ export const overpassBase =
   '//overpass-api.openhistoricalmap.org/api/interpreter';
 export const mapboxAccessToken =
   process.env.REACT_APP_MAPBOX_ACCESS_TOKEN ||
-  'k.eyJ1Ijoib3Blbmhpc3RvcmljYWxtYXAiLCJhIjoiY202a3ZqcHN1MDJnYzJpcHhlczVqbXBuNiJ9.DvNrZEF1ISEluA9k-MSHtA';
+  'pk.eyJ1Ijoib3Blbmhpc3RvcmljYWxtYXAiLCJhIjoiY202a3ZqcHN1MDJnYzJpcHhlczVqbXBuNiJ9.DvNrZEF1ISEluA9k-MSHtA';
 export const statusUrl =
   'https://raw.githubusercontent.com/osmcha/osmcha-frontend/status/status.json';
 export const enableRealChangesets = false;
