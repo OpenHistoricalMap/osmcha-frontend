@@ -7,15 +7,6 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: openhistoricalmap/osmcha-frontend
-  REACT_APP_PAGE_SIZE: "25"
-  REACT_APP_OVERPASS_BASE: "//overpass-api.openhistoricalmap.org/api/interpreter"
-  REACT_APP_MAPBOX_ACCESS_TOKEN: "pk.eyJ1Ijoib3Blbmhpc3RvcmljYWxtYXAiLCJhIjoiY202a3ZqcHN1MDJnYzJpcHhlczVqbXBuNiJ9.DvNrZEF1ISEluA9k-MSHtA"
-  REACT_APP_OSM_URL: "https://www.openhistoricalmap.org"
-  REACT_APP_OSM_API: "https://api.openhistoricalmap.org/api/0.6"
-  REACT_APP_NOMINATIM_URL: "https://nominatim-api.openhistoricalmap.org/search.php"
-  REACT_APP_DEFAULT_FROM_DATE: "2"
-  REACT_APP_DEFAULT_TO_DATE: "5"
-  REACT_APP_DISABLE_REAL_CHANGESETS: "false"
 
 jobs:
   build:
@@ -55,14 +46,3 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          build-args: |
-            REACT_APP_PAGE_SIZE=${{ env.REACT_APP_PAGE_SIZE }}
-            REACT_APP_OVERPASS_BASE=${{ env.REACT_APP_OVERPASS_BASE }}
-            REACT_APP_MAPBOX_ACCESS_TOKEN=${{ env.REACT_APP_MAPBOX_ACCESS_TOKEN }}
-            REACT_APP_OSM_URL=${{ env.REACT_APP_OSM_URL }}
-            REACT_APP_OSM_API=${{ env.REACT_APP_OSM_API }}
-            REACT_APP_NOMINATIM_URL=${{ env.REACT_APP_NOMINATIM_URL }}
-            REACT_APP_DEFAULT_FROM_DATE=${{ env.REACT_APP_DEFAULT_FROM_DATE }}
-            REACT_APP_DEFAULT_TO_DATE=${{ env.REACT_APP_DEFAULT_TO_DATE }}
-            REACT_APP_DISABLE_REAL_CHANGESETS=${{ env.REACT_APP_DISABLE_REAL_CHANGESETS }}
-            
