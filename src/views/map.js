@@ -101,7 +101,8 @@ class CMap extends React.PureComponent {
 
   componentWillUnmount() {
     window.onresize = null;
-    if (this.props.style !== 'satellite') this.props.updateStyle('satellite');
+    if (this.props.style !== 'ohm_historical')
+      this.props.updateStyle('ohm_historical');
     event && event.emit('remove');
   }
 

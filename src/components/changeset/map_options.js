@@ -15,6 +15,11 @@ class MapOptions extends React.PureComponent {
   };
   layerOptions = [
     {
+      label: 'Historical OHM',
+      value: 'ohm_historical',
+      function: () => this.toggleOHM()
+    },
+    {
       label: 'Mapbox Satellite',
       value: 'satellite',
       function: () => this.toggleSatellite()
@@ -46,6 +51,17 @@ class MapOptions extends React.PureComponent {
   onChange = () => {
     importChangesetMap('getMapInstance').then(
       r => r && r() && r().filterLayers()
+    );
+  };
+
+  toggleOHM = () => {
+    importChangesetMap('getMapInstance').then(
+      r =>
+        r &&
+        r() &&
+        r().renderMap(
+          'https://www.openhistoricalmap.org/map-styles/historical/historical.json'
+        )
     );
   };
   toggleSatellite = () => {
@@ -126,6 +142,14 @@ class MapOptions extends React.PureComponent {
       r => r && r() && r().renderMap(osmStyle)
     );
   };
+
+  componentDidMount() {
+    // Optionally ensure container is ready before rendering the map
+    if (this.ref) {
+      this.toggleOHM();
+    }
+  }
+
   render() {
     return (
       <div className="px12 py6">
@@ -223,8 +247,8 @@ class MapOptions extends React.PureComponent {
           <Dropdown
             eventTypes={['click', 'touchend']}
             value={this.props.style}
-            onAdd={() => { }}
-            onRemove={() => { }}
+            onAdd={() => {}}
+            onRemove={() => {}}
             options={this.layerOptions}
             onChange={this.onLayerChange}
             display={this.getLayerDropdownDisplay(this.props.style)}
