@@ -8,6 +8,7 @@ WORKDIR /app
 COPY package.json yarn.lock /app/
 RUN yarn set version stable
 RUN yarn install
+RUN sed -i "s|mapbox://styles/[^\"']*|https://www.openhistoricalmap.org/map-styles/historical/historical.json|g" node_modules/changeset-map/dist/*.js
 
 COPY src/ /app/src
 COPY public/ /app/public
