@@ -18,6 +18,7 @@ ENV REACT_APP_PRODUCTION_API_URL /api/v1
 ENV NODE_OPTIONS --openssl-legacy-provider
 
 RUN yarn run build:${BUILD_ENV}
+RUN sed -i "s|mapbox://styles/[^\"']*|https://www.openhistoricalmap.org/map-styles/historical/historical.json|g" node_modules/changeset-map/dist/*.js
 
 FROM nginx:alpine
 COPY --from=builder /app/build /srv/www
