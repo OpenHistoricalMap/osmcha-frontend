@@ -60,7 +60,7 @@ class MapOptions extends React.PureComponent {
         r &&
         r() &&
         r().renderMap(
-          'https://gist.githubusercontent.com/Rub21/27be2d3482f66743393af068ff68985d/raw/3cee0905224fc8dcac5a34937fad036c9f6fbbf9/historical.json'
+          'https://www.openhistoricalmap.org/map-styles/historical/historical.json'
         )
     );
   };
