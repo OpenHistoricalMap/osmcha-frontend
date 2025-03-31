@@ -8,7 +8,12 @@ WORKDIR /app
 COPY package.json yarn.lock /app/
 RUN yarn set version stable
 RUN yarn install
+
+## Replace values for ohm
 RUN sed -i "s|mapbox://styles/[^\"']*|https://www.openhistoricalmap.org/map-styles/historical/historical.json|g" node_modules/changeset-map/dist/*.js
+RUN sed -i "s|www.openstreetmap.org|www.openhistoricalmap.org|g" node_modules/changeset-map/dist/*.js
+RUN sed -i "s|overpass.osmcha.org|overpass-api.openhistoricalmap.org|g" node_modules/changeset-map/dist/*.js
+RUN sed -i "s|osmcha.org|osmcha.openhistoricalmap.org|g" node_modules/changeset-map/dist/*.js
 
 COPY src/ /app/src
 COPY public/ /app/public
