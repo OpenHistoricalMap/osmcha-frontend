@@ -9,7 +9,8 @@ export const stack = process.env.REACT_APP_STACK;
 export const appVersion = pkg.version;
 
 let url =
-  process.env.REACT_APP_PRODUCTION_API_URL || 'https://osmcha.org/api/v1';
+  process.env.REACT_APP_PRODUCTION_API_URL ||
+  'https://osmcha.openhistoricalmap.org/api/v1';
 
 window.debug_info = () =>
   `isDev=${isDev.toString()} isStaging=${isStaging.toString()} isProd=${isProd.toString()} isLocal=${isLocal.toString()} stack=${stack ||

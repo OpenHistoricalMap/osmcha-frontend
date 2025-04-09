@@ -23,7 +23,7 @@ export class WatchListUser extends React.Component {
   };
   fetchUsername = (username: string) =>
     fetch(
-      `https://www.openstreetmap.org/api/0.6/changesets.json?display_name=${this.state.username}`
+      `https://www.openhistoricalmap.org/api/0.6/changesets.json?display_name=${this.state.username}`
     )
       .then(handleErrors)
       .then(r => r.json())
@@ -36,7 +36,7 @@ export class WatchListUser extends React.Component {
       });
 
   fetchUid = (uid: string) =>
-    fetch(`https://www.openstreetmap.org/api/0.6/user/${uid}.json`)
+    fetch(`https://www.openhistoricalmap.org/api/0.6/user/${uid}.json`)
       .then(handleErrors)
       .then(r => r.json());
 
