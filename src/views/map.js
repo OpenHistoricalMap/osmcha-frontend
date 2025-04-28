@@ -47,7 +47,7 @@ const OPENSTREETMAP_CARTO_STYLE = {
       ],
       tileSize: 256,
       attribution:
-        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        '© <a href="https://www.openhistoricalmap.org/copyright">OpenStreetMap</a> contributors'
     }
   },
   layers: [

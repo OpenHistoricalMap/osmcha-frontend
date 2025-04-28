@@ -6,7 +6,7 @@ import { isMobile } from '../../utils';
 function openEditor(selected, camera) {
   let baseUrl;
   if (selected && selected[0].value === 'iD') {
-    baseUrl = 'https://www.openstreetmap.org/edit?editor=id&';
+    baseUrl = 'https://www.openhistoricalmap.org/edit?editor=id&';
   }
   if (selected && selected[0].value === 'Rapid') {
     baseUrl = 'https://rapideditor.org/edit?';
@@ -39,7 +39,7 @@ export function OpenIn({ display, changesetId, camera, className }) {
     {
       label: 'JOSM',
       value: 'JOSM',
-      href: `http://127.0.0.1:8111/import?url=https://www.openstreetmap.org/api/0.6/changeset/${changesetId}/download`
+      href: `http://127.0.0.1:8111/import?url=https://www.openhistoricalmap.org/api/0.6/changeset/${changesetId}/download`
     },
     {
       label: 'Level0',
@@ -65,15 +65,15 @@ export function OpenIn({ display, changesetId, camera, className }) {
     options.unshift({
       label: 'OSM.org',
       value: 'OSM.org',
-      href: `https://www.openstreetmap.org/changeset/${changesetId}`
+      href: `https://www.openhistoricalmap.org/changeset/${changesetId}`
     });
   }
 
   return (
     <div className={`select-container ${className}`}>
       <Dropdown
-        onAdd={() => {}}
-        onRemove={() => {}}
+        onAdd={() => { }}
+        onRemove={() => { }}
         value={[]}
         onChange={value => openEditor(value, camera)}
         options={options}

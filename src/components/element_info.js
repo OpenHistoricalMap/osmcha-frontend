@@ -36,7 +36,7 @@ function ElementInfo({ changeset, action, token, setHighlight }) {
   return (
     <div className="element-info">
       <h2>
-        <a href={`https://www.openstreetmap.org/${id}`}>{id}</a>
+        <a href={`https://www.openhistoricalmap.org/${id}`}>{id}</a>
         {' was '}
         {actionPhrase}
       </h2>
@@ -70,7 +70,7 @@ function HistoryDropdown({ id }) {
   let options = [
     {
       label: 'OSM',
-      href: `https://www.openstreetmap.org/${id}/history`
+      href: `https://www.openhistoricalmap.org/${id}/history`
     },
     {
       label: 'Deep History',
@@ -97,11 +97,11 @@ function OpenInDropdown({ id }) {
   let options = [
     {
       label: 'OSM',
-      href: `https://www.openstreetmap.org/${id}`
+      href: `https://www.openhistoricalmap.org/${id}`
     },
     {
       label: 'iD',
-      href: `https://www.openstreetmap.org/edit?editor=id&${id.replace(
+      href: `https://www.openhistoricalmap.org/edit?editor=id&${id.replace(
         '/',
         '='
       )}`
