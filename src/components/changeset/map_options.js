@@ -24,6 +24,7 @@ const toggle = (arr, elem) => {
 
 class MapOptions extends React.PureComponent {
   layerOptions = [
+    { label: 'OpenHistoricalMap', value: 'ohm' },
     { label: 'Bing aerial imagery', value: 'bing' },
     { label: 'OpenStreetMap Carto', value: 'carto' }
   ];

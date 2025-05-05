@@ -109,10 +109,8 @@ class CMap extends React.PureComponent {
     }
   }
 
-  initializeMap() {
-    if (!this.props.changeset) {
-      return;
-    }
+  async initializeMap() {
+    if (!this.props.changeset) return;
 
     let container = document.getElementById('container');
 
@@ -120,10 +118,29 @@ class CMap extends React.PureComponent {
       this.map.remove();
     }
 
-    let style = BING_AERIAL_IMAGERY_STYLE;
+    let style;
 
-    if (this.props.style === 'carto') {
+    const styleType = 'ohm';
+
+    if (styleType === 'carto') {
       style = OPENSTREETMAP_CARTO_STYLE;
+    } else if (styleType === 'ohm') {
+      try {
+        const response = await fetch(
+          'https://www.openhistoricalmap.org/map-styles/main/main.json'
+        );
+        style = await response.json();
+      } catch (err) {
+        console.error('Failed to load OHM style:', err);
+        this.props.modal({
+          kind: 'error',
+          title: 'Failed to load map style',
+          description: 'Could not load OpenHistoricalMap style.'
+        });
+        return;
+      }
+    } else {
+      style = BING_AERIAL_IMAGERY_STYLE;
     }
 
     let map = new maplibre.Map({
@@ -131,7 +148,7 @@ class CMap extends React.PureComponent {
       style,
       maxZoom: 22,
       hash: false,
-      attributionControl: false // we're moving this to the other corner
+      attributionControl: false
     });
 
     map.addControl(new maplibre.AttributionControl(), 'bottom-left');
@@ -142,9 +159,9 @@ class CMap extends React.PureComponent {
     map.keyboard.disableRotation();
 
     let { adiff } = this.props.changeset;
-    // HACK: override attribution string (the string Overpass sends is wordier and doesn't have a hyperlink)
     adiff.note =
       'Map data from <a href=https://openstreetmap.org/copyright>OpenStreetMap</a>';
+
     const adiffViewer = new MapLibreAugmentedDiffViewer(adiff, {
       onClick: this.handleClick,
       showElements: this.props.showElements,
@@ -181,8 +198,6 @@ class CMap extends React.PureComponent {
     this.map = map;
     this.adiffViewer = adiffViewer;
 
-    // Store the map and adiffViewer in the ref passed from the parent component
-    // (this allows other components to imperatively update the map state)
     if (this.props.mapRef) {
       this.props.mapRef.current = {
         map: this.map,

@@ -39,7 +39,7 @@ class Changeset extends React.PureComponent {
     // map configuration state (set in the map options panel and used in the CMap view)
     showElements: ['node', 'way', 'relation'],
     showActions: ['create', 'modify', 'delete', 'noop'],
-    basemapStyle: 'bing'
+    basemapStyle: 'ohm'
   };
 
   // This ref is passed to CMap, which updates it with references to the MapLibre map
