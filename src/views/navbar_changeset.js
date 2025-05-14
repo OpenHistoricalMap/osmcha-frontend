@@ -22,7 +22,6 @@ import {
   OPEN_IN_ACHAVI,
   OPEN_IN_HDYC
 } from '../config/bindings';
-import { API_URL } from '../config/index';
 
 import {
   handleChangesetModifyTag,
@@ -32,7 +31,6 @@ import type { RootStateType } from '../store';
 
 type propsType = {
   changesetId: number,
-  location: Object,
   currentChangeset: Map<string, *>,
   username: ?string,
   lastKeyStroke: Map<string, *>,
@@ -84,9 +82,10 @@ class NavbarChangeset extends React.PureComponent<void, propsType, *> {
           0,
           0
         ]);
-        const url = `https://www.openhistoricalmap.org/edit?changeset=${this.props.changesetId
-          }#map=15/${coordinates && coordinates.get('1')}/${coordinates &&
-          coordinates.get('0')}`;
+        if (!coordinates) return;
+
+        let url = `https://www.openhistoricalmap.org/edit?changeset=${this.props.changesetId}`;
+        url += `#map=15/${coordinates.get('0')}/${coordinates.get('1')}`;
         window.open(url, '_blank');
         break;
       }
@@ -196,7 +195,7 @@ class NavbarChangeset extends React.PureComponent<void, propsType, *> {
                       href={`https://www.openhistoricalmap.org/changeset/${this.props.changesetId}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      title="See on OHM"
+                      title="See on OSM"
                     >
                       <svg className="icon icon--s mt-neg3 ml3 inline-block align-middle bg-gray-faint color-darken25 color-darken50-on-hover transition">
                         <use xlinkHref="#icon-share" />
@@ -208,21 +207,13 @@ class NavbarChangeset extends React.PureComponent<void, propsType, *> {
             )}
             <OpenIn
               changesetId={this.props.changesetId}
-              coordinates={
-                this.props.currentChangeset &&
-                this.props.currentChangeset.getIn([
-                  'geometry',
-                  'coordinates',
-                  0,
-                  0
-                ])
-              }
               display={
                 mobile
                   ? `${this.isChecked() ? '' : 'Changeset'} ${this.props.changesetId
                   }`
                   : 'Open with'
               }
+              camera={this.props.camera}
             />
           </div>
         }
@@ -290,7 +281,6 @@ NavbarChangeset = keyboardToggleEnhancer(
 
 NavbarChangeset = connect(
   (state: RootStateType, props) => ({
-    location: props.location,
     changesetId: parseInt(state.changeset.get('changesetId'), 10),
     currentChangeset: state.changeset.getIn([
       'changesets',

@@ -139,8 +139,9 @@ export class WatchListUser extends React.Component {
           {this.state.verified ? 'Verified' : 'Verify'}
         </Button>
         <Button
-          className={`btn wmax120 ml12 ${this.state.verified ? 'btn--green' : ''
-            }`}
+          className={`btn wmax120 ml12 ${
+            this.state.verified ? 'btn--green' : ''
+          }`}
           onClick={this.onAdd}
         >
           Add

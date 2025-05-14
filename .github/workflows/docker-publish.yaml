@@ -2,7 +2,7 @@ name: Build Docker Image, Push to GHCR
 
 on:
   push:
-    branches: ['main', 'staging', 'develop']
+    branches: ['main', 'staging', 'upstream']
 
 env:
   REGISTRY: ghcr.io

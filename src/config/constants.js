@@ -5,12 +5,10 @@ export const PAGE_SIZE = process.env.REACT_APP_PAGE_SIZE || 25;
 export const overpassBase =
   process.env.REACT_APP_OVERPASS_BASE ||
   '//overpass-api.openhistoricalmap.org/api/interpreter';
-export const mapboxAccessToken =
-  process.env.REACT_APP_MAPBOX_ACCESS_TOKEN ||
-  'pk.eyJ1Ijoib3Blbmhpc3RvcmljYWxtYXAiLCJhIjoiY202a3ZqcHN1MDJnYzJpcHhlczVqbXBuNiJ9.DvNrZEF1ISEluA9k-MSHtA';
 export const statusUrl =
   'https://raw.githubusercontent.com/osmcha/osmcha-frontend/status/status.json';
-export const enableRealChangesets = false;
+export const enableRealChangesets = !process.env
+  .REACT_APP_DISABLE_REAL_CHANGESETS;
 
 export const osmchaSocialTokenUrl = `${API_URL}/social-auth/`;
 export const osmchaUrl = API_URL.replace('api/v1', '');
@@ -20,13 +18,15 @@ export const osmUrl =
 export const isOfficialOSM = osmUrl === 'https://www.openhistoricalmap.org';
 export const apiOSM =
   process.env.REACT_APP_OSM_API || 'https://api.openhistoricalmap.org/api/0.6';
+export const adiffServiceUrl =
+  process.env.REACT_APP_ADIFF_SERVICE_URL || 'https://adiffs.openhistoricalmap.org';
 
 export const whosThat =
   'https://whosthat.osmz.ru/whosthat.php?action=names&id=';
 
 export const nominatimUrl =
   process.env.REACT_APP_NOMINATIM_URL ||
-  'https://nominatim-api.openhistoricalmap.org/search.php';
+  'https://nominatim.openhistoricalmap.org/search.php';
 
 // set a default from date x days before today
 export const DEFAULT_FROM_DATE = process.env.REACT_APP_DEFAULT_FROM_DATE || 2;

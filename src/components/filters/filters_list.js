@@ -12,7 +12,6 @@ import {
   LocationSelect
 } from './';
 
-import { BBoxPicker } from '../bbox_picker';
 import { loadingEnhancer } from '../loading_enhancer';
 import filters from '../../config/filters.json';
 import { getDefaultFromDate } from '../../utils/filters';
@@ -41,7 +40,7 @@ class FiltersList extends React.PureComponent<void, propsType, *> {
       display: f.display,
       value: this.props.filters.get(f.name),
       placeholder: f.placeholder,
-      options: f.options || [],
+      options: f.options,
       onChange: this.props.handleChange,
       dataURL: f.data_url,
       min: f.min,
@@ -66,7 +65,7 @@ class FiltersList extends React.PureComponent<void, propsType, *> {
             this.props.filters.has(f.name + '__lte')
           }
         >
-          <span className="flex-parent flex-parent--row  ">
+          <span className="flex-parent flex-parent--row">
             <Text
               {...propsToSend}
               className="mr3"
@@ -128,13 +127,6 @@ class FiltersList extends React.PureComponent<void, propsType, *> {
               max={today}
             />
           </span>
-        </Wrapper>
-      );
-    }
-    if (f.type === 'location') {
-      return (
-        <Wrapper {...wrapperProps}>
-          <LocationSelect {...propsToSend} />
         </Wrapper>
       );
     }
@@ -206,46 +198,55 @@ class FiltersList extends React.PureComponent<void, propsType, *> {
         </Wrapper>
       );
     }
-    if (f.type === 'map') {
-      return (
-        <Wrapper
-          {...wrapperProps}
-          description={
-            this.props.active === f.name && (
-              <BBoxPicker
-                onChange={this.props.handleChange}
-                name={f.name}
-                value={this.props.filters.get(f.name)}
-              />
-            )
-          }
-        >
-          <Text {...propsToSend} />
-        </Wrapper>
-      );
-    }
   };
+
   render() {
     return (
       <div className="px30 flex-child filters-scroll">
-        <h2 className="txt-xl mr6 txt-bold mt24   border-b border--gray-light border--1">
+        <h2 className="txt-xl mr6 txt-bold mt24 border-b border--gray-light border--1">
           Basic
         </h2>
         {filtersData
-          .slice(0, 5)
+          .slice(0, 2)
+          .map((f: Object, k) => this.renderFilters(f, k))}
+        <Wrapper
+          name="location"
+          display="Location"
+          hasValue={
+            this.props.filters.has('geometry') ||
+            this.props.filters.has('in_bbox')
+          }
+          handleFocus={this.props.handleFocus}
+          description={
+            this.props.active === 'location' &&
+            'Filter changesets whose bounding box intersects a chosen area'
+          }
+        >
+          <LocationSelect
+            name="location"
+            value={
+              this.props.filters.get('geometry') ||
+              this.props.filters.get('in_bbox')
+            }
+            placeholder="Type a place name"
+            onChange={this.props.handleChange}
+          />
+        </Wrapper>
+        {filtersData
+          .slice(2, 3)
           .map((f: Object, k) => this.renderFilters(f, k))}
         <h2 className="txt-xl mr6 txt-bold mt30  border-b border--gray-light border--1">
           OSM Features
         </h2>
         {filtersData
-          .slice(5, 6)
+          .slice(3, 4)
           .map((f: Object, k) => this.renderFilters(f, k))}
         <span className="flex-child flex-child--grow wmin420 wmax435" />
         <h2 className="txt-xl mr6 txt-bold mt30  border-b border--gray-light border--1">
           Flags
         </h2>
         {filtersData
-          .slice(6, 8)
+          .slice(4, 6)
           .map((f: Object, k) => this.renderFilters(f, k))}
         <span className="flex-child flex-child--grow wmin420 wmax435" />
 
@@ -253,7 +254,7 @@ class FiltersList extends React.PureComponent<void, propsType, *> {
           Review
         </h2>
         {filtersData
-          .slice(8, 12)
+          .slice(6, 10)
           .map((f: Object, k) => this.renderFilters(f, k))}
         <span className="flex-child flex-child--grow wmin420 wmax435" />
 
@@ -261,14 +262,14 @@ class FiltersList extends React.PureComponent<void, propsType, *> {
           Users & Teams
         </h2>
         {filtersData
-          .slice(12, 19)
+          .slice(10, 17)
           .map((f: Object, k) => this.renderFilters(f, k))}
         <span className="flex-child flex-child--grow wmin420 wmax435" />
 
         <h2 className="txt-xl mr6 txt-bold mt30  border-b border--gray-light border--1">
           Changeset Details
         </h2>
-        {filtersData.slice(19).map((f: Object, k) => this.renderFilters(f, k))}
+        {filtersData.slice(17).map((f: Object, k) => this.renderFilters(f, k))}
         <span className="flex-child flex-child--grow wmin420 wmax435" />
       </div>
     );
