@@ -19,7 +19,7 @@ export const isOfficialOSM = osmUrl === 'https://www.openhistoricalmap.org';
 export const apiOSM =
   process.env.REACT_APP_OSM_API || 'https://api.openhistoricalmap.org/api/0.6';
 export const adiffServiceUrl =
-  process.env.REACT_APP_ADIFF_SERVICE_URL || 'https://adiffs.osmcha.org';
+  process.env.REACT_APP_ADIFF_SERVICE_URL || 'https://adiffs.openhistoricalmap.org';
 
 export const whosThat =
   'https://whosthat.osmz.ru/whosthat.php?action=names&id=';
