@@ -10,6 +10,12 @@ import { updateStyle } from '../store/map_controls_actions';
 import { modal } from '../store/modal_actions';
 import type { RootStateType } from '../store';
 
+import '@openhistoricalmap/maplibre-gl-dates';
+import { filterByDate } from '@openhistoricalmap/maplibre-gl-dates';
+maplibre.Map.prototype.filterByDate = function(date) {
+  filterByDate(this, date);
+};
+
 const BING_AERIAL_IMAGERY_STYLE = {
   version: 8,
   sources: {

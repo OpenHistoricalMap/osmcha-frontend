@@ -232,6 +232,7 @@ export class _Changeset extends React.PureComponent<*, propsType, *> {
               showActions={showActions}
               setShowElements={setShowElements}
               setShowActions={setShowActions}
+              handleDateChange={this.handleDateChange}
             />
           </Box>
         )}
@@ -309,6 +310,17 @@ export class _Changeset extends React.PureComponent<*, propsType, *> {
 
     // show the ElementInfo overlay for that action
     this.props.setSelected(action);
+  };
+
+  handleDateChange = (event: { target: { value: string } }) => {
+    const { value } = event.target;
+    console.log(value);
+    const map = this.props.mapRef.current?.map;
+    if (map && typeof map.filterByDate === 'function') {
+      map.filterByDate(value);
+    } else {
+      console.warn('Map or map.filterByDate is not available.');
+    }
   };
 
   render() {
