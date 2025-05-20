@@ -146,7 +146,7 @@ class MapOptions extends React.PureComponent {
           >
             {this.layerOptions.map(opt => (
               <option key={opt.value} value={opt.value}>
-                {opt.label} --
+                {opt.label}
               </option>
             ))}
           </select>
