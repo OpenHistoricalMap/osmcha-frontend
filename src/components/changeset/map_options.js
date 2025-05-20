@@ -37,7 +37,6 @@ class MapOptions extends React.PureComponent {
       setShowActions,
       handleDateChange
     } = this.props;
-
     return (
       <div className="px12 py6">
         <h2 className="txt-m txt-uppercase txt-bold mr6 mb3">Map Controls</h2>
@@ -146,7 +145,9 @@ class MapOptions extends React.PureComponent {
             onChange={e => this.props.updateStyle(e.target.value)}
           >
             {this.layerOptions.map(opt => (
-              <option value={opt.value}>{opt.label}</option>
+              <option key={opt.value} value={opt.value}>
+                {opt.label} --
+              </option>
             ))}
           </select>
         </section>

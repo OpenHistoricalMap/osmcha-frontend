@@ -67,6 +67,17 @@ const OPENSTREETMAP_CARTO_STYLE = {
   ]
 };
 
+let OHM_MAP_STYLE = null;
+
+const getOHMStyle = async () => {
+  if (!OHM_MAP_STYLE) {
+    const res = await fetch(
+      'https://www.openhistoricalmap.org/map-styles/main/main.json'
+    );
+    OHM_MAP_STYLE = await res.json();
+  }
+  return OHM_MAP_STYLE;
+};
 class CMap extends React.PureComponent {
   props: {
     changesetId: number,
@@ -132,10 +143,7 @@ class CMap extends React.PureComponent {
       style = OPENSTREETMAP_CARTO_STYLE;
     } else if (styleType === 'ohm') {
       try {
-        const response = await fetch(
-          'https://www.openhistoricalmap.org/map-styles/main/main.json'
-        );
-        style = await response.json();
+        style = await getOHMStyle();
       } catch (err) {
         console.error('Failed to load OHM style:', err);
         this.props.modal({
@@ -219,6 +227,10 @@ class CMap extends React.PureComponent {
 
     if (this.props.style === 'carto') {
       style = OPENSTREETMAP_CARTO_STYLE;
+    }
+
+    if (this.props.style === 'ohm') {
+      style = OHM_MAP_STYLE;
     }
 
     this.map.setStyle(style);
