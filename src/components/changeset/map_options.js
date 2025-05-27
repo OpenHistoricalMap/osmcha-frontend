@@ -152,12 +152,14 @@ class MapOptions extends React.PureComponent {
             ))}
           </select>
         </section>
-        <section className="cmap-filter-type-section cmap-pb3 mt3">
-          <h6 className="txt-bold">Filter map style by date</h6>
-          <div className="mt6">
-            <HistoricalDateSlider handleDateChange={handleDateChange} />
-          </div>
-        </section>
+        {this.props.style === 'ohm' ? (
+          <section className="cmap-filter-type-section cmap-pb3">
+            <h6 className="txt-bold">Filter map style by date</h6>
+            <div className="mt6">
+              <HistoricalDateSlider handleDateChange={handleDateChange} />
+            </div>
+          </section>
+        ) : null}
       </div>
     );
   }
