@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { updateStyle } from '../../store/map_controls_actions';
+import HistoricalDateSlider from './historical_date_picker';
 
 // helper functions for adding/removing elements from an array when a
 // checkbox is toggled
@@ -153,39 +154,8 @@ class MapOptions extends React.PureComponent {
         </section>
         <section className="cmap-filter-type-section cmap-pb3 mt3">
           <h6 className="txt-bold">Filter map style by date</h6>
-
-          <input
-            type="date"
-            className="input input--s mt3"
-            placeholder="YYYY-MM-DD"
-            defaultValue={new Date().toISOString().split('T')[0]}
-            onChange={handleDateChange}
-            title="Filter map by date"
-          />
-
           <div className="mt6">
-            <label className="block mb3">
-              Year:
-              <strong id="year-display" className="ml6">
-                {new Date().getFullYear()}
-              </strong>
-            </label>
-
-            <input
-              type="range"
-              min="0"
-              max={new Date().getFullYear()}
-              defaultValue={new Date().getFullYear()}
-              className="w-full accent-blue-500"
-              onChange={e => {
-                const year = e.target.value;
-                document.getElementById('year-display').textContent = year;
-
-                if (handleDateChange) {
-                  handleDateChange({ target: { value: `${year}-01-01` } });
-                }
-              }}
-            />
+            <HistoricalDateSlider handleDateChange={handleDateChange} />
           </div>
         </section>
       </div>
