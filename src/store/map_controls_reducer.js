@@ -6,7 +6,7 @@ import { MAPCONTROLS } from './map_controls_actions';
 export type mapControlsReducerType = Map<'style', any>;
 
 const mapControlsInitial: mapControlsReducerType = fromJS({
-  style: 'satellite'
+  style: 'ohm'
 });
 
 export function mapControlsReducer(
