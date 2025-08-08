@@ -19,7 +19,7 @@ export const isOfficialOSM = osmUrl === 'https://www.openhistoricalmap.org';
 export const apiOSM =
   process.env.REACT_APP_OSM_API || 'https://api.openhistoricalmap.org/api/0.6';
 export const adiffServiceUrl =
-  process.env.REACT_APP_ADIFF_SERVICE_URL || 'https://s3.us-east-1.amazonaws.com/planet-staging.openhistoricalmap.org/ohm-augmented-diffs';
+  process.env.REACT_APP_ADIFF_SERVICE_URL || 'https://s3.us-east-1.amazonaws.com/planet.openhistoricalmap.org/ohm-augmented-diffs';
 
 export const whosThat =
   'https://whosthat.osmz.ru/whosthat.php?action=names&id=';
